@@ -38,7 +38,7 @@ export default defineNuxtConfig({
   },
 
   hub: {
-    ai: true,
+    ai: false,
     database: true
   },
 
