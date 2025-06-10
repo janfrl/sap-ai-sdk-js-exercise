@@ -44,6 +44,14 @@
   "pnpm": {
     "ignoredBuiltDependencies": [
       "workerd"
+    ],
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "@tailwindcss/oxide",
+      "esbuild",
+      "sharp",
+      "unrs-resolver",
+      "vue-demi"
     ]
   },
   "packageManager": "pnpm@10.12.1"
