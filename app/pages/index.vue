@@ -9,7 +9,7 @@ async function createChat(prompt: string) {
   loading.value = true
   const chat = await $fetch('/api/chats', {
     method: 'POST',
-    body: { input: prompt }
+    body: { input: prompt },
   })
 
   refreshNuxtData('chats')
@@ -23,24 +23,24 @@ function onSubmit() {
 const quickChats = [
   {
     label: 'Why use Nuxt UI Pro?',
-    icon: 'i-logos-nuxt-icon'
+    icon: 'i-logos-nuxt-icon',
   },
   {
     label: 'Help me create a Vue composable',
-    icon: 'i-logos-vue'
+    icon: 'i-logos-vue',
   },
   {
     label: 'Tell me more about UnJS',
-    icon: 'i-logos-unjs'
+    icon: 'i-logos-unjs',
   },
   {
     label: 'Why should I consider VueUse?',
-    icon: 'i-logos-vueuse'
+    icon: 'i-logos-vueuse',
   },
   {
     label: 'Tailwind CSS best practices',
-    icon: 'i-logos-tailwindcss-icon'
-  }
+    icon: 'i-logos-tailwindcss-icon',
+  },
 ]
 </script>
 

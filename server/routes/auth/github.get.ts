@@ -4,7 +4,7 @@ export default defineOAuthGitHubEventHandler({
     const session = await getUserSession(event)
 
     let user = await db.query.users.findFirst({
-      where: (user, { eq }) => and(eq(user.provider, 'github'), eq(user.providerId, ghUser.id))
+      where: (user, { eq }) => and(eq(user.provider, 'github'), eq(user.providerId, ghUser.id)),
     })
     if (!user) {
       user = await db.insert(tables.users).values({
@@ -14,12 +14,13 @@ export default defineOAuthGitHubEventHandler({
         avatar: ghUser.avatar_url || '',
         username: ghUser.login,
         provider: 'github',
-        providerId: ghUser.id
+        providerId: ghUser.id,
       }).returning().get()
-    } else {
+    }
+    else {
       // Assign anonymous chats with session id to user
       await db.update(tables.chats).set({
-        userId: user.id
+        userId: user.id,
       }).where(eq(tables.chats.userId, session.id))
     }
 
@@ -31,5 +32,5 @@ export default defineOAuthGitHubEventHandler({
   onError(event, error) {
     console.error('GitHub OAuth error:', error)
     return sendRedirect(event, '/')
-  }
+  },
 })

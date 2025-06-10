@@ -5,11 +5,11 @@ export default defineNuxtConfig({
     '@nuxt/ui-pro',
     '@nuxtjs/mdc',
     '@nuxthub/core',
-    'nuxt-auth-utils'
+    'nuxt-auth-utils',
   ],
 
   devtools: {
-    enabled: true
+    enabled: true,
   },
 
   css: ['~/assets/css/main.css'],
@@ -17,53 +17,53 @@ export default defineNuxtConfig({
   mdc: {
     highlight: {
       // noApiRoute: true
-      shikiEngine: 'javascript'
-    }
+      shikiEngine: 'javascript',
+    },
   },
 
   future: {
-    compatibilityVersion: 4
+    compatibilityVersion: 4,
   },
 
   experimental: {
-    viewTransition: true
+    viewTransition: true,
   },
 
   compatibilityDate: '2024-07-11',
 
   nitro: {
     experimental: {
-      openAPI: true
-    }
+      openAPI: true,
+    },
   },
 
   hub: {
-    ai: true,
-    database: true
+    ai: false,
+    database: true,
   },
 
   vite: {
     optimizeDeps: {
-      include: ['debug']
+      include: ['debug'],
     },
 
     $server: {
       build: {
         rollupOptions: {
           output: {
-            preserveModules: true
-          }
-        }
-      }
-    }
+            preserveModules: true,
+          },
+        },
+      },
+    },
   },
 
   eslint: {
     config: {
       stylistic: {
         commaDangle: 'never',
-        braceStyle: '1tbs'
-      }
-    }
-  }
+        braceStyle: '1tbs',
+      },
+    },
+  },
 })

@@ -17,8 +17,8 @@ const items = computed<DropdownMenuItem[][]>(() => ([[{
   label: user.value?.name || user.value?.username,
   avatar: {
     src: user.value?.avatar,
-    alt: user.value?.name || user.value?.username
-  }
+    alt: user.value?.name || user.value?.username,
+  },
 }], [{
   label: 'Theme',
   icon: 'i-lucide-palette',
@@ -28,7 +28,7 @@ const items = computed<DropdownMenuItem[][]>(() => ([[{
     chip: appConfig.ui.colors.primary,
     content: {
       align: 'center',
-      collisionPadding: 16
+      collisionPadding: 16,
     },
     children: colors.map(color => ({
       label: color,
@@ -40,15 +40,15 @@ const items = computed<DropdownMenuItem[][]>(() => ([[{
         e.preventDefault()
 
         appConfig.ui.colors.primary = color
-      }
-    }))
+      },
+    })),
   }, {
     label: 'Neutral',
     slot: 'chip',
     chip: appConfig.ui.colors.neutral,
     content: {
       align: 'end',
-      collisionPadding: 16
+      collisionPadding: 16,
     },
     children: neutrals.map(color => ({
       label: color,
@@ -60,9 +60,9 @@ const items = computed<DropdownMenuItem[][]>(() => ([[{
         e.preventDefault()
 
         appConfig.ui.colors.neutral = color
-      }
-    }))
-  }]
+      },
+    })),
+  }],
 }, {
   label: 'Appearance',
   icon: 'i-lucide-sun-moon',
@@ -75,7 +75,7 @@ const items = computed<DropdownMenuItem[][]>(() => ([[{
       e.preventDefault()
 
       colorMode.preference = 'light'
-    }
+    },
   }, {
     label: 'Dark',
     icon: 'i-lucide-moon',
@@ -88,54 +88,54 @@ const items = computed<DropdownMenuItem[][]>(() => ([[{
     },
     onSelect(e: Event) {
       e.preventDefault()
-    }
-  }]
+    },
+  }],
 }], [{
   label: 'Templates',
   icon: 'i-lucide-layout-template',
   children: [{
     label: 'Starter',
-    to: 'https://ui-pro-starter.nuxt.dev/'
+    to: 'https://ui-pro-starter.nuxt.dev/',
   }, {
     label: 'Landing',
-    to: 'https://landing-template.nuxt.dev/'
+    to: 'https://landing-template.nuxt.dev/',
   }, {
     label: 'Docs',
-    to: 'https://docs-template.nuxt.dev/'
+    to: 'https://docs-template.nuxt.dev/',
   }, {
     label: 'SaaS',
-    to: 'https://saas-template.nuxt.dev/'
+    to: 'https://saas-template.nuxt.dev/',
   }, {
     label: 'Dashboard',
-    to: 'https://dashboard-template.nuxt.dev/'
+    to: 'https://dashboard-template.nuxt.dev/',
   }, {
     label: 'Chat',
     to: 'https://chat-template.nuxt.dev/',
     checked: true,
-    type: 'checkbox'
-  }]
+    type: 'checkbox',
+  }],
 }], [{
   label: 'Documentation',
   icon: 'i-lucide-book-open',
   to: 'https://ui.nuxt.com/getting-started/installation/pro/nuxt',
-  target: '_blank'
+  target: '_blank',
 }, {
   label: 'GitHub repository',
   icon: 'i-simple-icons-github',
   to: 'https://github.com/nuxt-ui-pro/chat',
-  target: '_blank'
+  target: '_blank',
 }, {
   label: 'Upgrade to Pro',
   icon: 'i-lucide-rocket',
   to: 'https://ui.nuxt.com/pro/purchase',
-  target: '_blank'
+  target: '_blank',
 }], [{
   label: 'Log out',
   icon: 'i-lucide-log-out',
   onSelect() {
     clear()
     navigateTo('/')
-  }
+  },
 }]]))
 </script>
 
@@ -148,11 +148,11 @@ const items = computed<DropdownMenuItem[][]>(() => ([[{
     <UButton
       v-bind="{
         label: collapsed ? undefined : (user?.name || user?.username),
-        trailingIcon: collapsed ? undefined : 'i-lucide-chevrons-up-down'
+        trailingIcon: collapsed ? undefined : 'i-lucide-chevrons-up-down',
       }"
       :avatar="{
         src: user?.avatar || undefined,
-        alt: user?.name || user?.username
+        alt: user?.name || user?.username,
       }"
       color="neutral"
       variant="ghost"
@@ -160,7 +160,7 @@ const items = computed<DropdownMenuItem[][]>(() => ([[{
       :square="collapsed"
       class="data-[state=open]:bg-elevated"
       :ui="{
-        trailingIcon: 'text-dimmed'
+        trailingIcon: 'text-dimmed',
       }"
     />
 
@@ -168,7 +168,7 @@ const items = computed<DropdownMenuItem[][]>(() => ([[{
       <span
         :style="{
           '--color-light': `var(--color-${(item as any).chip}-500)`,
-          '--color-dark': `var(--color-${(item as any).chip}-400)`
+          '--color-dark': `var(--color-${(item as any).chip}-400)`,
         }"
         class="ms-0.5 size-2 rounded-full bg-(--color-light) dark:bg-(--color-dark)"
       />

@@ -1,7 +1,8 @@
 {
   "name": "nuxt-ui-pro-template-chat",
-  "private": true,
   "type": "module",
+  "private": true,
+  "packageManager": "pnpm@10.12.1",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -14,19 +15,21 @@
   },
   "dependencies": {
     "@ai-sdk/vue": "^1.2.12",
+    "@antfu/eslint-config": "^4.14.1",
     "@iconify-json/logos": "^1.2.4",
     "@iconify-json/lucide": "^1.2.47",
     "@iconify-json/simple-icons": "^1.2.38",
     "@nuxt/ui-pro": "^3.1.3",
     "@nuxthub/core": "^0.8.27",
     "@nuxtjs/mdc": "^0.17.0",
+    "@sap-ai-sdk/orchestration": "^1.14.0",
     "ai": "^4.3.16",
     "date-fns": "^4.1.0",
     "drizzle-orm": "^0.44.2",
     "nuxt": "^3.17.5",
     "nuxt-auth-utils": "^0.5.20",
     "shiki-stream": "^0.1.2",
-    "workers-ai-provider": "^0.6.0"
+    "zod": "^3.25.57"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.4.1",
@@ -37,13 +40,20 @@
     "vue-tsc": "^2.2.10",
     "wrangler": "^4.19.1"
   },
-  "resolutions": {
-    "unimport": "4.1.1"
-  },
   "pnpm": {
     "ignoredBuiltDependencies": [
       "workerd"
+    ],
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "@tailwindcss/oxide",
+      "esbuild",
+      "sharp",
+      "unrs-resolver",
+      "vue-demi"
     ]
   },
-  "packageManager": "pnpm@10.12.1"
+  "resolutions": {
+    "unimport": "4.1.1"
+  }
 }

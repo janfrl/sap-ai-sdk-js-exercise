@@ -1,9 +1,21 @@
-// @ts-check
-import withNuxt from './.nuxt/eslint.config.mjs'
+import antfu from '@antfu/eslint-config'
+import nuxt from './.nuxt/eslint.config.mjs'
 
-export default withNuxt({
-  rules: {
-    'vue/multi-word-component-names': 'off',
-    'vue/max-attributes-per-line': ['error', { singleline: 3 }]
-  }
-})
+export default antfu(
+  {},
+  {
+    name: 'tailwind/yaml/rules',
+    files: ['**/*.yaml', '**/*.yml'],
+    rules: {
+      'yaml/plain-scalar': ['off'],
+    },
+  },
+  {
+    name: 'nuxt-studio/md/rules',
+    files: ['**/*.md'],
+    rules: {
+      'no-irregular-whitespace': ['off'],
+    },
+  },
+  nuxt,
+)
