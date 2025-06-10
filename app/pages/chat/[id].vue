@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { DefineComponent } from 'vue'
-import { useChat, type Message } from '@ai-sdk/vue'
+import { type Message, useChat } from '@ai-sdk/vue'
 import { useClipboard } from '@vueuse/core'
 import ProseStreamPre from '../../components/prose/PreStream.vue'
 
 const components = {
-  pre: ProseStreamPre as unknown as DefineComponent
+  pre: ProseStreamPre as unknown as DefineComponent,
 }
 
 const route = useRoute()
@@ -14,7 +14,7 @@ const clipboard = useClipboard()
 const { model } = useLLM()
 
 const { data: chat } = await useFetch(`/api/chats/${route.params.id}`, {
-  cache: 'force-cache'
+  cache: 'force-cache',
 })
 if (!chat.value) {
   throw createError({ statusCode: 404, statusMessage: 'Chat not found', fatal: true })
@@ -26,10 +26,10 @@ const { messages, input, handleSubmit, reload, stop, status, error } = useChat({
   initialMessages: chat.value.messages.map(message => ({
     id: message.id,
     content: message.content,
-    role: message.role
+    role: message.role,
   })),
   body: {
-    model: model.value
+    model: model.value,
   },
   onResponse(response) {
     if (response.headers.get('X-Chat-Title')) {
@@ -42,9 +42,9 @@ const { messages, input, handleSubmit, reload, stop, status, error } = useChat({
       description: message,
       icon: 'i-lucide-alert-circle',
       color: 'error',
-      duration: 0
+      duration: 0,
     })
-  }
+  },
 })
 
 const copied = ref(false)

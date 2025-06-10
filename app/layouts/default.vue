@@ -11,8 +11,8 @@ const open = ref(false)
 const deleteModal = overlay.create(LazyModalConfirm, {
   props: {
     title: 'Delete chat',
-    description: 'Are you sure you want to delete this chat? This cannot be undone.'
-  }
+    description: 'Are you sure you want to delete this chat? This cannot be undone.',
+  },
 })
 
 const { data: chats, refresh: refreshChats } = await useFetch('/api/chats', {
@@ -22,8 +22,8 @@ const { data: chats, refresh: refreshChats } = await useFetch('/api/chats', {
     label: chat.title || 'Untitled',
     to: `/chat/${chat.id}`,
     icon: 'i-lucide-message-circle',
-    createdAt: chat.createdAt
-  }))
+    createdAt: chat.createdAt,
+  })),
 })
 
 onNuxtReady(async () => {
@@ -45,12 +45,12 @@ const { groups } = useChats(chats)
 const items = computed(() => groups.value?.flatMap((group) => {
   return [{
     label: group.label,
-    type: 'label' as const
+    type: 'label' as const,
   }, ...group.items.map(item => ({
     ...item,
     slot: 'chat' as const,
     icon: undefined,
-    class: item.label === 'Untitled' ? 'text-muted' : ''
+    class: item.label === 'Untitled' ? 'text-muted' : '',
   }))]
 }))
 
@@ -66,7 +66,7 @@ async function deleteChat(id: string) {
   toast.add({
     title: 'Chat deleted',
     description: 'Your chat has been deleted',
-    icon: 'i-lucide-trash'
+    icon: 'i-lucide-trash',
   })
 
   refreshChats()
@@ -79,7 +79,7 @@ async function deleteChat(id: string) {
 defineShortcuts({
   c: () => {
     navigateTo('/')
-  }
+  },
 })
 </script>
 
@@ -165,8 +165,8 @@ defineShortcuts({
         items: [{
           label: 'New chat',
           to: '/',
-          icon: 'i-lucide-square-pen'
-        }]
+          icon: 'i-lucide-square-pen',
+        }],
       }, ...groups]"
     />
 

@@ -1,13 +1,13 @@
+import type { ChatMessage } from '@sap-ai-sdk/orchestration/dist/client/api/schema/chat-message'
 import { OrchestrationClient } from '@sap-ai-sdk/orchestration'
 import { readValidatedBody } from 'h3'
 import { z } from 'zod/v4'
-import type { ChatMessage } from '@sap-ai-sdk/orchestration/dist/client/api/schema/chat-message'
 
 defineRouteMeta({
   openAPI: {
     description: 'Chat with AI.',
-    tags: ['ai']
-  }
+    tags: ['ai'],
+  },
 })
 
 export default defineEventHandler(async (event) => {
@@ -19,28 +19,28 @@ export default defineEventHandler(async (event) => {
     messages: z.array(
       z.object({
         role: z.string(),
-        content: z.string()
-      })
-    )
+        content: z.string(),
+      }),
+    ),
   })
   const { model, messages } = await readValidatedBody(event, schema.parse) as {
     model: string
-    messages: { role: string; content: string }[]
+    messages: { role: string, content: string }[]
   }
 
   const db = useDrizzle()
   const client = new OrchestrationClient({
     llm: {
       model_name: model,
-      model_params: { max_tokens: 10000 }
-    }
+      model_params: { max_tokens: 10000 },
+    },
   })
 
   const chat = await db.query.chats.findFirst({
     where: (chat, { eq }) => and(eq(chat.id, id as string), eq(chat.userId, session.user?.id || session.id)),
     with: {
-      messages: true
-    }
+      messages: true,
+    },
   })
   if (!chat) {
     throw createError({ statusCode: 404, statusMessage: 'Chat not found' })
@@ -56,13 +56,13 @@ export default defineEventHandler(async (event) => {
         - The title should be less than 30 characters long
         - The title should be a summary of the user's message
         - Do not use quotes (' or ") or colons (:) or any other punctuation
-        - Do not use markdown, just plain text`
+        - Do not use markdown, just plain text`,
         },
         {
           role: 'user',
-          content: chat.messages[0]!.content
-        }
-      ]
+          content: chat.messages[0]!.content,
+        },
+      ],
     })
     const title = titleResponse.getContent()?.replace(/:/g, '').split('\n')[0] || ''
     setHeader(event, 'X-Chat-Title', title)
@@ -74,7 +74,7 @@ export default defineEventHandler(async (event) => {
     await db.insert(tables.messages).values({
       chatId: id as string,
       role: 'user',
-      content: lastMessage.content
+      content: lastMessage.content,
     })
   }
 
@@ -95,17 +95,17 @@ export default defineEventHandler(async (event) => {
       await db.insert(tables.messages).values({
         chatId: chat.id,
         role: 'assistant',
-        content: fullText
+        content: fullText,
       })
     },
     cancel() {
       streamResponse.stream.controller.abort()
-    }
+    },
   })
 
   return new Response(readable, {
     headers: {
-      'Content-Type': 'text/event-stream'
-    }
+      'Content-Type': 'text/event-stream',
+    },
   })
 })

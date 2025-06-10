@@ -24,17 +24,21 @@ export function useChats(chats: Ref<Chat[] | undefined>) {
 
       if (isToday(chatDate)) {
         today.push(chat)
-      } else if (isYesterday(chatDate)) {
+      }
+      else if (isYesterday(chatDate)) {
         yesterday.push(chat)
-      } else if (chatDate >= oneWeekAgo) {
+      }
+      else if (chatDate >= oneWeekAgo) {
         lastWeek.push(chat)
-      } else if (chatDate >= oneMonthAgo) {
+      }
+      else if (chatDate >= oneMonthAgo) {
         lastMonth.push(chat)
-      } else {
+      }
+      else {
         // Format: "January 2023", "February 2023", etc.
         const monthYear = chatDate.toLocaleDateString('en-US', {
           month: 'long',
-          year: 'numeric'
+          year: 'numeric',
         })
 
         if (!older[monthYear]) {
@@ -64,7 +68,7 @@ export function useChats(chats: Ref<Chat[] | undefined>) {
       formattedGroups.push({
         id: 'today',
         label: 'Today',
-        items: today
+        items: today,
       })
     }
 
@@ -72,7 +76,7 @@ export function useChats(chats: Ref<Chat[] | undefined>) {
       formattedGroups.push({
         id: 'yesterday',
         label: 'Yesterday',
-        items: yesterday
+        items: yesterday,
       })
     }
 
@@ -80,7 +84,7 @@ export function useChats(chats: Ref<Chat[] | undefined>) {
       formattedGroups.push({
         id: 'last-week',
         label: 'Last week',
-        items: lastWeek
+        items: lastWeek,
       })
     }
 
@@ -88,7 +92,7 @@ export function useChats(chats: Ref<Chat[] | undefined>) {
       formattedGroups.push({
         id: 'last-month',
         label: 'Last month',
-        items: lastMonth
+        items: lastMonth,
       })
     }
 
@@ -98,7 +102,7 @@ export function useChats(chats: Ref<Chat[] | undefined>) {
         formattedGroups.push({
           id: monthYear,
           label: monthYear,
-          items: older[monthYear]
+          items: older[monthYear],
         })
       }
     })
@@ -107,6 +111,6 @@ export function useChats(chats: Ref<Chat[] | undefined>) {
   })
 
   return {
-    groups
+    groups,
   }
 }

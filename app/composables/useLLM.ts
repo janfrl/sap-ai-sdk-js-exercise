@@ -45,12 +45,12 @@ export function useLLM() {
     'gemini-2.0-flash',
     'gemini-2.0-flash-lite',
     'alephalpha-pharia-1-7b-control',
-    'deepseek-ai--deepseek-r1'
+    'deepseek-ai--deepseek-r1',
   ]
   const model = useCookie<string>('llm-model', { default: () => 'gemini-2.0-flash-lite' })
 
   return {
     models,
-    model
+    model,
   }
 }

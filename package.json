@@ -1,7 +1,8 @@
 {
   "name": "nuxt-ui-pro-template-chat",
-  "private": true,
   "type": "module",
+  "private": true,
+  "packageManager": "pnpm@10.12.1",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -39,9 +40,6 @@
     "vue-tsc": "^2.2.10",
     "wrangler": "^4.19.1"
   },
-  "resolutions": {
-    "unimport": "4.1.1"
-  },
   "pnpm": {
     "ignoredBuiltDependencies": [
       "workerd"
@@ -55,5 +53,7 @@
       "vue-demi"
     ]
   },
-  "packageManager": "pnpm@10.12.1"
+  "resolutions": {
+    "unimport": "4.1.1"
+  }
 }
