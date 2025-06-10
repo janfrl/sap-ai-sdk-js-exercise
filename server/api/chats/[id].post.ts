@@ -1,6 +1,6 @@
 import { OrchestrationClient } from '@sap-ai-sdk/orchestration'
 import { readValidatedBody } from 'h3'
-import { z } from 'zod'
+import { z } from 'zod/v4'
 import type { ChatMessage } from '@sap-ai-sdk/orchestration/dist/client/api/schema/chat-message'
 
 defineRouteMeta({
