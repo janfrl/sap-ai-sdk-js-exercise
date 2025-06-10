@@ -3,7 +3,7 @@
 [![Nuxt UI Pro](https://img.shields.io/badge/Made%20with-Nuxt%20UI%20Pro-00DC82?logo=nuxt&labelColor=020420)](https://ui.nuxt.com/pro)
 [![Deploy to NuxtHub](https://img.shields.io/badge/Deploy%20to-NuxtHub-00DC82?logo=nuxt&labelColor=020420)](https://hub.nuxt.com/new?repo=nuxt-ui-pro/chat)
 
-Full-featured AI Chatbot Nuxt application with authentication, chat history, multiple pages, collapsible sidebar, keyboard shortcuts, light & dark mode, command palette and more. Built using [Nuxt UI Pro](https://ui.nuxt.com/pro) components and powered by the **SAP AI SDK for JavaScript** for a complete chat experience.
+Full-featured AI Chatbot Nuxt application with authentication, chat history, multiple pages, collapsible sidebar, keyboard shortcuts, light & dark mode, command palette and more. Built using [Nuxt UI Pro](https://ui.nuxt.com/pro) components and powered by the [SAP AI SDK for JavaScript](https://github.com/SAP/ai-sdk-js) for a complete chat experience.
 
 - [Live demo](https://chat-template.nuxt.dev/)
 - [Documentation](https://ui.nuxt.com/getting-started/installation/pro/nuxt)
@@ -18,11 +18,11 @@ Full-featured AI Chatbot Nuxt application with authentication, chat history, mul
 
 ## Features
 
-- ⚡️ **Streaming AI messages** powered by the [Vercel AI SDK ](https://sdk.vercel.ai)
-- 🤖 **Multiple model support** via the **SAP AI SDK for JavaScript**
+- ⚡️ **Streaming AI messages** powered by the [Vercel AI SDK](https://sdk.vercel.ai)
+- 🤖 **Multiple model support** via the [SAP AI SDK for JavaScript](https://github.com/SAP/ai-sdk-js)
 - 🔐 **Authentication** via [nuxt-auth-utils](https://github.com/atinux/nuxt-auth-utils)
 - 💾 **Chat history persistence** using [NuxtHub database](https://hub.nuxt.com/docs/features/database) and [Drizzle ORM](https://orm.drizzle.team)
-- 🚀 **One-click deploy** to your NuxtHub account: [deploy now](https://hub.nuxt.com/new?repo=nuxt-ui-pro/chat)
+- 🚀 **One-click deploy** to your Cloudflare account with NuxtHub: [deploy now](https://hub.nuxt.com/new?repo=nuxt-ui-pro/chat)
 
 ## Quick Start
 
@@ -45,7 +45,7 @@ npx nuxthub link
 ```
 
 > [!TIP]
-> It works with free NuxtHub accounts.
+> It works with free Cloudflare and NuxtHub accounts.
 
 To add authentication with GitHub, you need to [create a GitHub OAuth application](https://github.com/settings/applications/new) and then fill the credentials in your `.env`:
 
@@ -87,7 +87,7 @@ Locally preview production build:
 pnpm preview
 ```
 
-Deploy your project with zero configuration:
+Deploy to your Cloudflare account with zero configuration:
 
 ```bash
 npx nuxthub deploy
@@ -95,6 +95,8 @@ npx nuxthub deploy
 
 > [!NOTE]
 > NuxtHub will automatically spawn a D1 database and apply the database migrations when deploying your project.
+
+Optionally, you can create a [Cloudflare AI Gateway](https://developers.cloudflare.com/ai-gateway/) to have usage analytics and the ability to cache response to reduce costs. Once created, you can add the `NUXT_CLOUDFLARE_GATEWAY_ID` environment variable with the named of your gateway.
 
 ## Renovate integration
 
