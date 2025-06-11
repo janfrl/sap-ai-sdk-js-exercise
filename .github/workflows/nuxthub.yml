@@ -1,6 +1,6 @@
 name: nuxthub
 
-on: push
+# on: push
 
 jobs:
   deploy:
