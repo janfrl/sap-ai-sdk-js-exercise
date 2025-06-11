@@ -3,6 +3,7 @@ const input = ref('')
 const loading = ref(false)
 
 const { model } = useLLM()
+const { config } = useExerciseConfig()
 
 async function createChat(prompt: string) {
   input.value = prompt
@@ -66,7 +67,10 @@ const quickChats = [
           <UChatPromptSubmit color="neutral" />
 
           <template #footer>
-            <ModelSelect v-model="model" />
+            <div class="flex gap-2">
+              <ModelSelect v-model="model" />
+              <ConfigSelect v-model="config" />
+            </div>
           </template>
         </UChatPrompt>
 
