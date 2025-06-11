@@ -31,4 +31,8 @@ Save the file. Nuxt automatically reloads your changes. Trigger the task through
 
 Learn more about orchestrating LLMs in the [documentation](https://sap.github.io/ai-sdk/docs/js/overview-cloud-sdk-for-ai-js).
 
+## Practical Example
+
+A marketing department might set up this minimal configuration to quickly query a foundation model for campaign ideas. Using the orchestration service keeps API keys out of the client application.
+
 Continue to [Exercise 2 - Prompt Templating](../ex2/README.md).
