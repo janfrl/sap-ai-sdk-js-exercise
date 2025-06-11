@@ -38,12 +38,12 @@ function remove(key: string) {
       </span>
     </UButton>
 
-    <UModal v-model="open" title="Input Parameters" :ui="{ width: 'sm:!max-w-md' }">
+    <UModal v-model="open" title="Input Parameters" class="sm:!max-w-md">
       <div class="flex flex-col gap-2">
         <div v-for="(value, key) in params" :key="key" class="flex items-center gap-1 text-sm">
           <span>{{ key }}:</span>
           <span>{{ value }}</span>
-          <UButton icon="i-lucide-x" variant="ghost" color="neutral" size="2xs" @click="remove(key)" />
+          <UButton icon="i-lucide-x" variant="ghost" color="neutral" size="xs" @click="remove(key)" />
         </div>
         <div class="flex items-center gap-1">
           <UInput v-model="newKey" placeholder="Key" size="xs" class="flex-1" />

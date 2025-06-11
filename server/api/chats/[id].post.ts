@@ -1,6 +1,6 @@
 import type { OrchestrationClient } from '@sap-ai-sdk/orchestration'
 import type { ChatMessage } from '@sap-ai-sdk/orchestration/dist/client/api/schema/chat-message'
-import { readValidatedBody } from 'h3'
+import { readBody } from 'h3'
 import { z } from 'zod/v4'
 
 defineRouteMeta({
@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
   const schema = z.object({
     model: z.string(),
     config: z.string().optional(),
-    inputParams: z.record(z.string()).optional(),
+    inputParams: z.record(z.string(), z.string()).optional(),
     messages: z.array(
       z.object({
         role: z.string(),
@@ -25,7 +25,7 @@ export default defineEventHandler(async (event) => {
       }),
     ),
   })
-  const { model, messages, config, inputParams } = await readValidatedBody(event, schema.parse) as {
+  const { model, messages, config, inputParams } = schema.parse(await readBody(event)) as {
     model: string
     config?: string
     inputParams?: Record<string, string>
