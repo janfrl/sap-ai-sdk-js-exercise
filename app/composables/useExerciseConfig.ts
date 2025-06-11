@@ -1,10 +1,34 @@
+interface NitroTaskInfo {
+  description?: string
+}
+
+interface NitroTasksResponse {
+  tasks: Record<string, NitroTaskInfo>
+}
+
+interface SelectOption {
+  value: string
+  label: string
+}
+
+const EMPTY_OPTION: SelectOption = { value: '', label: ' ' }
+
 export function useExerciseConfig() {
-  const configs = [
-    'Exercise 1 - LLM Access',
-    'Exercise 2 - Prompt Template',
-    'Exercise 3 - Content Filtering',
-  ]
-  const config = useCookie<string>('exercise-config', { default: () => configs[0] ?? '' })
+  const { data: raw } = useFetch<NitroTasksResponse>('/_nitro/tasks', {
+    default: () => ({ tasks: {} }),
+  })
+
+  const configs = computed<SelectOption[]>(() => [
+    EMPTY_OPTION,
+    ...Object.entries(raw.value.tasks).map(([key, task]) => ({
+      value: key,
+      label: task.description ?? key,
+    })),
+  ])
+
+  const config = useCookie('exercise-config', {
+    default: () => EMPTY_OPTION,
+  })
 
   return {
     configs,
