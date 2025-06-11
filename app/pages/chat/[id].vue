@@ -12,6 +12,7 @@ const route = useRoute()
 const toast = useToast()
 const clipboard = useClipboard()
 const { model } = useLLM()
+const { config } = useExerciseConfig()
 
 const { data: chat } = await useFetch(`/api/chats/${route.params.id}`, {
   cache: 'force-cache',
@@ -30,6 +31,7 @@ const { messages, input, handleSubmit, reload, stop, status, error } = useChat({
   })),
   body: {
     model: model.value,
+    config: config.value,
   },
   onResponse(response) {
     if (response.headers.get('X-Chat-Title')) {
@@ -107,7 +109,10 @@ onMounted(() => {
           />
 
           <template #footer>
-            <ModelSelect v-model="model" />
+            <div class="flex gap-2">
+              <ModelSelect v-model="model" />
+              <ConfigSelect v-model="config" />
+            </div>
           </template>
         </UChatPrompt>
       </UContainer>
