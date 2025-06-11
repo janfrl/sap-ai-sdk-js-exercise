@@ -1,10 +1,11 @@
 export function useExerciseConfig() {
-  const configs = [
-    'Exercise 1 - LLM Access',
-    'Exercise 2 - Prompt Template',
-    'Exercise 3 - Content Filtering',
-  ]
-  const config = useCookie<string>('exercise-config', { default: () => configs[0] ?? '' })
+  const { data: configs } = useFetch<string[]>('/api/configs', { default: () => [] })
+  const config = useCookie<string>('exercise-config', { default: () => '' })
+
+  watchEffect(() => {
+    if (!config.value && configs.value?.length)
+      config.value = configs.value[0] || ''
+  })
 
   return {
     configs,

@@ -1,11 +1,11 @@
-import ex1 from './ex1'
-import ex2 from './ex2'
-import ex3 from './ex3'
+import type { ExerciseConfig } from './config-types'
+
+const modules = import.meta.glob<{ default: ExerciseConfig }>('./ex*.ts', { eager: true })
+
+export const configs: ExerciseConfig[] = Object.values(modules).map(m => m.default)
 
 export { type ExerciseConfig } from './config-types'
 
-export const configs = [ex1, ex2, ex3]
-
-export function getExerciseConfig(name: string) {
-  return configs.find(c => c.name === name) || ex1
+export function getExerciseConfig(name: string): ExerciseConfig {
+  return configs.find(c => c.name === name) || configs[0]!
 }
