@@ -3,10 +3,13 @@
 In this exercise you will configure a basic client that sends a single prompt to the orchestration service.
 
 ### 1. Navigate to the Task
+
 Open [`server/tasks/config/ex1.ts`](../../server/tasks/config/ex1.ts).
 
 ### 2. Add Implementation
+
 Insert or verify the following code inside the task:
+
 ```typescript
 const model_name = payload.model as string & ChatModel
 const result = new OrchestrationClient({
@@ -19,9 +22,11 @@ const result = new OrchestrationClient({
 })
 return { result }
 ```
+
 This creates an `OrchestrationClient` using the model selected in the UI and prepares a user message.
 
 ### 3. Run and Verify
+
 Save the file. Nuxt automatically reloads your changes. Trigger the task through the chat page and confirm that the LLM returns a response.
 
 Learn more about orchestrating LLMs in the [documentation](https://sap.github.io/ai-sdk/docs/js/overview-cloud-sdk-for-ai-js).
