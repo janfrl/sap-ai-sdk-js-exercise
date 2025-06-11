@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { TableColumn } from '@nuxt/ui'
+
 const { params } = useInputParams()
 
 const open = ref(false)
@@ -6,6 +8,29 @@ const newKey = ref('')
 const newValue = ref('')
 
 const count = computed(() => Object.keys(params.value).length)
+
+const data = computed(() =>
+  Object.entries(params.value).map(([key, value]) => ({ key, value })),
+)
+
+const UButton = resolveComponent('UButton')
+
+const columns: TableColumn<{ key: string, value: string }>[] = [
+  {
+    id: 'actions',
+    header: '',
+    cell: ({ row }) =>
+      h(UButton, {
+        icon: 'i-lucide-minus',
+        variant: 'ghost',
+        color: 'neutral',
+        size: 'xs',
+        onClick: () => remove(row.original.key),
+      }),
+  },
+  { accessorKey: 'key', header: 'Key' },
+  { accessorKey: 'value', header: 'Value' },
+]
 
 function add() {
   if (!newKey.value)
@@ -22,35 +47,27 @@ function remove(key: string) {
 </script>
 
 <template>
-  <div>
-    <UButton
-      icon="i-lucide-sliders"
-      color="neutral"
-      variant="ghost"
-      size="xs"
-      @click="open = true"
-    >
-      <span
-        v-if="count"
-        class="ml-1 text-xs text-white bg-primary rounded-full px-1"
+  <UModal v-model="open" title="Input Parameters">
+    <UChip :text="count" size="3xl" color="neutral">
+      <UButton
+        icon="i-lucide-sliders"
+        color="neutral"
+        variant="ghost"
+        @click="open = true"
       >
-        {{ count }}
-      </span>
-    </UButton>
+        Parameters
+      </UButton>
+    </UChip>
 
-    <UModal v-model="open" title="Input Parameters" class="sm:!max-w-md">
-      <div class="flex flex-col gap-2">
-        <div v-for="(value, key) in params" :key="key" class="flex items-center gap-1 text-sm">
-          <span>{{ key }}:</span>
-          <span>{{ value }}</span>
-          <UButton icon="i-lucide-x" variant="ghost" color="neutral" size="xs" @click="remove(key)" />
-        </div>
-        <div class="flex items-center gap-1">
-          <UInput v-model="newKey" placeholder="Key" size="xs" class="flex-1" />
-          <UInput v-model="newValue" placeholder="Value" size="xs" class="flex-1" />
-          <UButton label="Add" color="neutral" size="xs" variant="ghost" @click="add" />
+    <template #body>
+      <div class="flex flex-col gap-4">
+        <UTable :data="data" :columns="columns" />
+        <div class="flex items-center gap-2">
+          <UInput v-model="newKey" placeholder="Key" class="flex-1" />
+          <UInput v-model="newValue" placeholder="Value" class="flex-1" />
+          <UButton label="Add" color="neutral" variant="soft" @click="add" />
         </div>
       </div>
-    </UModal>
-  </div>
+    </template>
+  </UModal>
 </template>
