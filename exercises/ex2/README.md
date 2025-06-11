@@ -32,4 +32,8 @@ Save the file and test the task from the chat page. The LLM should generate a sh
 
 Learn more about prompt templating in the [documentation](https://sap.github.io/ai-sdk/docs/js/overview-cloud-sdk-for-ai-js).
 
+## Practical Example
+
+Recruiters can use this template to consistently create job adverts by only supplying the job title. The HTML formatting ensures the output integrates nicely with web portals.
+
 Continue to [Exercise 3 - Content Filtering](../ex3/README.md).

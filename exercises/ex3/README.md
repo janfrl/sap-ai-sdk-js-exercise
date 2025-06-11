@@ -37,3 +37,7 @@ Call `chatCompletion` and handle any errors if the filter blocks the prompt.
 Save the file and invoke the task. Unsafe input should be rejected according to the filter rules.
 
 Explore content filtering in the [documentation](https://sap.github.io/ai-sdk/docs/js/overview-cloud-sdk-for-ai-js).
+
+## Practical Example
+
+Compliance teams can integrate this filter to automatically reject self-harm or violent prompts before they are sent to the LLM, reducing the risk of inappropriate content in corporate chatbots.
