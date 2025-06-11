@@ -19,7 +19,7 @@ The server automatically reloads when files change, so no manual restarts are re
 ### 3. Understand `server/api/chats/[id].post.ts`
 Open [`server/api/chats/[id].post.ts`](../../server/api/chats/%5Bid%5D.post.ts). The route performs these steps:
 1. **Validate the request** using `zod` to ensure `model`, `config` and message list are provided.
-2. **Create an `OrchestrationClient`** by calling `runTask` with the selected config. The tasks from later exercises return this client instance.
+2. **Create an `OrchestrationClient`** by calling `runTask` with the selected config. If no config is provided, the route falls back to the `config:default` task, which creates a very simple client. The tasks from later exercises return this client instance.
 3. **Load or create the chat** from the database and generate a title on the first message using the LLM.
 4. **Persist the user's message** and stream the assistant response back to the browser using Server‑Sent Events.
 5. **Store the assistant reply** once streaming is complete.

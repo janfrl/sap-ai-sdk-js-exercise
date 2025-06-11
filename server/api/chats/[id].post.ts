@@ -31,7 +31,8 @@ export default defineEventHandler(async (event) => {
   }
 
   const db = useDrizzle()
-  const { result: client } = await runTask(config ?? '', { payload: { model } }) as { result: OrchestrationClient }
+  const taskName = config && config.length > 0 ? config : 'config:default'
+  const { result: client } = await runTask(taskName, { payload: { model } }) as { result: OrchestrationClient }
 
   const chat = await db.query.chats.findFirst({
     where: (chat, { eq }) => and(eq(chat.id, id as string), eq(chat.userId, session.user?.id || session.id)),
