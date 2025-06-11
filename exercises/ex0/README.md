@@ -52,8 +52,4 @@ Open [`server/api/chats/[id].post.ts`](../../server/api/chats/%5Bid%5D.post.ts).
 
 Having this context will help you understand how the configurations from the following exercises are used when chatting.
 
-## Practical Example
-
-IT administrators can use these setup steps to spin up a secure internal prototype before exposing any AI features to a wider audience.
-
 Continue to [Exercise 1 - Getting LLM Access](../ex1/README.md).
