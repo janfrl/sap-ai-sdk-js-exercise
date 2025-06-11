@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DefineComponent } from 'vue'
+import { computed, type DefineComponent } from 'vue'
 import { type Message, useChat } from '@ai-sdk/vue'
 import { useClipboard } from '@vueuse/core'
 import ProseStreamPre from '../../components/prose/PreStream.vue'
@@ -13,6 +13,7 @@ const toast = useToast()
 const clipboard = useClipboard()
 const { model } = useLLM()
 const { config } = useExerciseConfig()
+const { params } = useInputParams()
 
 const { data: chat } = await useFetch(`/api/chats/${route.params.id}`, {
   cache: 'force-cache',
@@ -29,10 +30,11 @@ const { messages, input, handleSubmit, reload, stop, status, error } = useChat({
     content: message.content,
     role: message.role,
   })),
-  body: {
+  body: computed(() => ({
     model: model.value,
     config: config.value?.value,
-  },
+    inputParams: params.value,
+  })),
   onResponse(response) {
     if (response.headers.get('X-Chat-Title')) {
       refreshNuxtData('chats')
@@ -112,6 +114,7 @@ onMounted(() => {
             <div class="flex gap-2">
               <ModelSelect v-model="model" />
               <ConfigSelect v-model="config" />
+              <InputParams />
             </div>
           </template>
         </UChatPrompt>

@@ -70,6 +70,7 @@ const quickChats = [
             <div class="flex gap-2">
               <ModelSelect v-model="model" />
               <ConfigSelect v-model="config" />
+              <InputParams />
             </div>
           </template>
         </UChatPrompt>

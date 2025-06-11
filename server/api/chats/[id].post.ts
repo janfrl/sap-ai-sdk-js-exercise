@@ -17,6 +17,7 @@ export default defineEventHandler(async (event) => {
   const schema = z.object({
     model: z.string(),
     config: z.string().optional(),
+    inputParams: z.record(z.string()).optional(),
     messages: z.array(
       z.object({
         role: z.string(),
@@ -24,9 +25,10 @@ export default defineEventHandler(async (event) => {
       }),
     ),
   })
-  const { model, messages, config } = await readValidatedBody(event, schema.parse) as {
+  const { model, messages, config, inputParams } = await readValidatedBody(event, schema.parse) as {
     model: string
     config?: string
+    inputParams?: Record<string, string>
     messages: { role: string, content: string }[]
   }
 
@@ -76,7 +78,10 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const streamResponse = await client.stream({ messages: messages as ChatMessage[] })
+  const streamResponse = await client.stream({
+    messages: messages as ChatMessage[],
+    ...(inputParams ? { inputParams } : {}),
+  })
   const contentStream = streamResponse.stream.toContentStream()
 
   const encoder = new TextEncoder()
