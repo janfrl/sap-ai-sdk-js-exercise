@@ -11,20 +11,18 @@ interface SelectOption {
   label: string
 }
 
-const EMPTY_OPTION: SelectOption = { value: '', label: ' ' }
+const EMPTY_OPTION: SelectOption = { value: 'config:default', label: ' ' }
 
 export function useExerciseConfig() {
   const { data: raw } = useFetch<NitroTasksResponse>('/_nitro/tasks', {
     default: () => ({ tasks: {} }),
   })
 
-  const configs = computed<SelectOption[]>(() => [
-    EMPTY_OPTION,
-    ...Object.entries(raw.value.tasks).map(([key, task]) => ({
-      value: key,
-      label: task.description ?? key,
-    })),
-  ])
+  const configs = computed<SelectOption[]>(() => Object.entries(raw.value.tasks).map(([key, task]) => ({
+    value: key,
+    label: task.description ?? key,
+  })),
+  )
 
   const config = useCookie('exercise-config', {
     default: () => EMPTY_OPTION,
