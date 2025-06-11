@@ -11,7 +11,7 @@ interface SelectOption {
   label: string
 }
 
-const EMPTY_OPTION: SelectOption = { value: 'config:default', label: ' ' }
+const EMPTY_OPTION: SelectOption = { value: 'config:default', label: '-' }
 
 export function useExerciseConfig() {
   const { data: raw } = useFetch<NitroTasksResponse>('/_nitro/tasks', {
