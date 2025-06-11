@@ -23,24 +23,24 @@ function onSubmit() {
 
 const quickChats = [
   {
-    label: 'Why use Nuxt UI Pro?',
+    label: 'How to integrate SAP AI Core with Nuxt 3?',
     icon: 'i-logos-nuxt-icon',
   },
   {
-    label: 'Help me create a Vue composable',
-    icon: 'i-logos-vue',
+    label: 'Getting started with SAP AI SDK in Nuxt UI Pro',
+    icon: 'i-logos-sap',
   },
   {
-    label: 'Tell me more about UnJS',
-    icon: 'i-logos-unjs',
+    label: 'Best practices for deploying ML models on SAP AI Core',
+    icon: 'i-mdi-robot',
   },
   {
-    label: 'Why should I consider VueUse?',
-    icon: 'i-logos-vueuse',
+    label: 'Implementing authentication flows in SAP AI SDK',
+    icon: 'i-mdi-shield-account',
   },
   {
-    label: 'Tailwind CSS best practices',
-    icon: 'i-logos-tailwindcss-icon',
+    label: 'Customizing themes and components in Nuxt UI Pro',
+    icon: 'i-mdi-palette',
   },
 ]
 </script>
