@@ -1,5 +1,5 @@
 import type { ExerciseConfig } from './config-types'
-import { buildAzureContentFilter, OrchestrationClient } from '@sap-ai-sdk/orchestration'
+import { buildAzureContentSafetyFilter, OrchestrationClient } from '@sap-ai-sdk/orchestration'
 
 const config: ExerciseConfig = {
   name: 'Exercise 3 - Content Filtering',
@@ -12,7 +12,11 @@ const config: ExerciseConfig = {
         ],
       },
       filtering: {
-        input: buildAzureContentFilter({ SelfHarm: 0 }),
+        input: {
+          filters: [
+            buildAzureContentSafetyFilter({ SelfHarm: 'ALLOW_SAFE' }),
+          ],
+        },
       },
     })
   },
