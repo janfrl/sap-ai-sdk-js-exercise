@@ -31,7 +31,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const db = useDrizzle()
-  const client = getExerciseConfig(config || 'ex1').createClient(model)
+  const client = getExerciseConfig(config ?? '').createClient(model)
 
   const chat = await db.query.chats.findFirst({
     where: (chat, { eq }) => and(eq(chat.id, id as string), eq(chat.userId, session.user?.id || session.id)),

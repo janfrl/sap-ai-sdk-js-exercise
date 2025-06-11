@@ -1,10 +1,10 @@
 export function useExerciseConfig() {
   const configs = [
-    { label: 'Exercise 1 - LLM Access', value: 'ex1' },
-    { label: 'Exercise 2 - Prompt Template', value: 'ex2' },
-    { label: 'Exercise 3 - Content Filtering', value: 'ex3' },
+    'Exercise 1 - LLM Access',
+    'Exercise 2 - Prompt Template',
+    'Exercise 3 - Content Filtering',
   ]
-  const config = useCookie<string>('exercise-config', { default: () => 'ex1' })
+  const config = useCookie<string>('exercise-config', { default: () => configs[0] ?? '' })
 
   return {
     configs,
