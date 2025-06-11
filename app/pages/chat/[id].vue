@@ -31,7 +31,7 @@ const { messages, input, handleSubmit, reload, stop, status, error } = useChat({
   })),
   body: {
     model: model.value,
-    config: config.value,
+    config: config.value?.value,
   },
   onResponse(response) {
     if (response.headers.get('X-Chat-Title')) {

@@ -1,7 +1,7 @@
+import type { OrchestrationClient } from '@sap-ai-sdk/orchestration'
 import type { ChatMessage } from '@sap-ai-sdk/orchestration/dist/client/api/schema/chat-message'
 import { readValidatedBody } from 'h3'
 import { z } from 'zod/v4'
-import { getExerciseConfig } from '../../utils/configs'
 
 defineRouteMeta({
   openAPI: {
@@ -31,7 +31,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const db = useDrizzle()
-  const client = getExerciseConfig(config ?? '').createClient(model)
+  const { result: client } = await runTask(config ?? '', { payload: { model } }) as { result: OrchestrationClient }
 
   const chat = await db.query.chats.findFirst({
     where: (chat, { eq }) => and(eq(chat.id, id as string), eq(chat.userId, session.user?.id || session.id)),
